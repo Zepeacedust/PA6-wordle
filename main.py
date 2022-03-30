@@ -9,7 +9,7 @@ def play_game():
     letters = int(input("How many letters do you want? "))
     word = WORDS.retrieve_word(letters)
     while word == None:
-        print(f"No words of length {letters}")
+        letters = input(f"No words of length {letters}, please enter another length: ")
         word = WORDS.retrieve_word(letters)
     game = Game(letters,guesses,word)
     while game.gameState == "":
