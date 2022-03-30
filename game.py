@@ -9,6 +9,9 @@ class Game:
     def save(self):
         pass
     def guess(self,attempt):
+        if self.attempts == self.guesses:
+            print("Max guesses reached")
+            return
         if len(attempt) != self.lenght:
             print("incorrect length")
             return
