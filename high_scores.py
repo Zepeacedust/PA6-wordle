@@ -32,13 +32,10 @@ class Account_Manager:
             #then return account data
         pass
     def load(self,account):
-        # if not length in self.allowed:
-        #     print("No words of that length exist, please try another")
-        #     return False
-        # print(f"Loading words of length {length}.")
-        # self.loaded[length] = load_file(f"words/l{length}.csv")
-        # return True
-        pass
+        if not account in self.allowed:
+            return False
+        self.loaded[account] = load_file(f"account/l{account}.csv")
+        return True
         
     def update(self, game):
         # length = len(word)
