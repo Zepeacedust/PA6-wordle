@@ -1,13 +1,29 @@
 import glob
 def load_file(filename):
     with open(filename, "r") as file:
-        return file.read().split(",")
+        lines =  file.read().split("\n\n")
+    games = []
+    print("yeetus")
+    for line in lines:
+        if line == "":
+            return games
+        parts = line .split("\n")
+        game = {}
+        game["guesses"] = parts.pop(0)
+        game["state"] = parts.pop(0)
+        game["length"] = parts.pop(0)
+        game["word"] = parts.pop(0)
+        clues = []
+        while parts != []:
+            clues.append((parts.pop(0),parts.pop(0)))
+        game["clues"] = clues
+        games.append(game)
 def get_valid_files():
     #finna öll leyfð files í words
     allowed = set()
     for file in glob.glob("accounts/*.csv"):
         try:
-            allowed.add(int(file[9:][:-4]))
+            allowed.add(file[9:][:-4])
         except Exception as e:
             print(f'invalid filename: "{file}" in words folder')
     return allowed
@@ -44,7 +60,7 @@ class Account_Manager:
     def load(self,account):
         if not account in self.allowed:
             return False
-        self.loaded[account] = load_file(f"account/l{account}.csv")
+        self.loaded[account] = load_file(f"accounts/{account}.csv")
         return True
         
     def update(self, game):
