@@ -5,13 +5,13 @@ class Game:
         self.guesses = guesses
         self.selected = word
         self.attempts = 0
-        self.gameStat = ""
+        self.gameState = ""
     def save(self):
         pass
     def guess(self,attempt):
         if self.attempts == self.guesses:
             print("Max guesses reached")
-            self.gameStat = "L"
+            self.gameState = "L"
             return
         if len(attempt) != self.lenght:
             print("incorrect length")
@@ -33,3 +33,4 @@ class Game:
                 return
         print(fin)
         print("Congrats you won!")
+        self.gameState
