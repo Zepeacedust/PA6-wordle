@@ -1,7 +1,7 @@
 import random
 class Game:
     def __init__(self, length, guesses,word) -> None:
-        self.lenght  = length
+        self.length  = length
         self.guesses = guesses
         self.selected = word
         self.attempts = 0
@@ -9,28 +9,27 @@ class Game:
     def save(self):
         pass
     def guess(self,attempt):
-        if self.attempts == self.guesses:
-            print("Max guesses reached")
-            self.gameState = "L"
-            return
-        if len(attempt) != self.lenght:
+        if len(attempt) != self.length:
             print("incorrect length")
             return
-        fin = ""
-        count = 0
-        for x in attempt.lower():
-            if x == self.selected[count].lower():
-                fin += "C"
-            elif x in self.selected.lower():
-                fin += "c"
+        clue, correct = self.generate_clue(attempt.lower())
+        if correct:
+            self.gameState = "W"
+        else:
+            self.attempts += 1
+            if self.attempts == self.guesses:
+                self.gameState = "L"
+        return clue
+    def generate_clue(self,guess):
+        clue = ""
+        correct = True
+        for i in range(self.length):
+            if guess[i].lower() == self.selected[i].lower():
+                clue += "C"
+            elif guess[i].lower() in self.selected.lower():
+                clue += "c"
+                correct = False
             else:
-                fin += "-"
-            count += 1
-        for x in fin:
-            if x != "C":
-                print(fin)
-                self.attempts += 1
-                return
-        print(fin)
-        print("Congrats you won!")
-        self.gameState
+                clue += "-"
+                correct = False
+        return (clue, correct)
