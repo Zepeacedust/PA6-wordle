@@ -3,6 +3,7 @@ from game import Game
 from loading_module import Word_Manager
 
 WORDS = Word_Manager()
+
 def play_game():
     guesses = int(input("How many guesses do you want? "))
     letters = int(input("How many letters do you want? "))
@@ -30,4 +31,6 @@ def check_history():
 while True:
     print()
     play_game()
-        
+
+
+WORDS.exit()
