@@ -8,7 +8,7 @@ class Game:
         self.gameState = ""
         self.clues = []
     def save(self):
-        return (self.guesses, self.gameState,self.length,self.selected,self.clues)
+        return {"guesses":self.guesses, "state":self.gameState,"length":self.length,"word":self.selected,"clues":self.clues}
     def guess(self,attempt):
         if len(attempt) != self.length:
             print("incorrect length")

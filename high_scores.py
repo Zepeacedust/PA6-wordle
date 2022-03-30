@@ -15,11 +15,11 @@ def get_valid_files():
 def overwrite_file(filename,data):
     with open(filename, "w") as file:
         for game in data:
-            file.write(str(game[0])+"\n")
-            file.write(str(game[1])+"\n")
-            file.write(str(game[2])+"\n")
-            file.write(str(game[3])+"\n")
-            for guess in game[4]:
+            file.write(str(game["guesses"])+"\n")
+            file.write(str(game["state"])+"\n")
+            file.write(str(game["length"])+"\n")
+            file.write(str(game["word"])+"\n")
+            for guess in game["clues"]:
                 file.write(guess[0]+"\n")
                 file.write(guess[1]+"\n")
         file.write("\n")
