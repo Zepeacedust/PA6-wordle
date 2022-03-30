@@ -23,7 +23,7 @@ def play_game():
         print("out of guesses, lol get rekt nerd.")
 
 def add_word():
-    pass
+    WORDS.update(input("Enter word to add: "))
 def check_history():
     pass
 def switch_accounts():
