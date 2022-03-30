@@ -9,7 +9,7 @@ def play_game():
     letters = int(input("How many letters do you want? "))
     word = WORDS.retrieve_word(letters)
     while word == None:
-        letters = input(f"No words of length {letters}, please enter another length: ")
+        letters = int(input(f"No words of length {letters}, please enter another length: "))
         word = WORDS.retrieve_word(letters)
     game = Game(letters,guesses,word)
     while game.gameState == "":
@@ -30,28 +30,26 @@ def switch_accounts():
     pass
 
 def main_menu():
-    F  = False
-    while F  == False:
+    while True:
         print("1. Play a game")
         print("2. Add word")
         print("3. Check history")
         print("4. Switch account")
-        try:
-            a = int(input("What do you want to do? "))
-            if a in [1,2,3,4]:
-                if a == 1:
-                    play_game()
-                elif a == 2:
-                    add_word()
-                elif a == 3:
-                    check_history()
-                elif a == 4:
-                    switch_accounts()
-            else:
-                print("incorrect input")  
-        except:
-            print("incorrect input")
-while True:
-    main_menu()
+        print("5. Quit")
+        a = input("What do you want to do? ")
+        if a == "1":
+            play_game()
+        elif a == "2":
+            add_word()
+        elif a == "3":
+            check_history()
+        elif a == "4":
+            switch_accounts()
+        elif a == "5":
+            break
+        else:
+            print("incorrect input")  
+
+main_menu()
         
 WORDS.exit()
