@@ -27,7 +27,24 @@ def play_game():
 def add_word():
     WORDS.update(input("Enter word to add: "))
 def check_history():
-    print(ACCOUNT.retrieve_data())
+    his = ACCOUNT.retrieve_data()
+    if his == None:
+        print("No games available")
+    else:
+        c = 1
+        print("#--------------------------------------------------------#")
+        for x in his:
+            if x["state"] == "W":
+                gen = "Won"
+            else:
+                gen = "lost"
+            print("Game",c)
+            print("You had",x["guesses"],"guesses")
+            print("You",gen,"The game")
+            print("And the word you where looking for was:",x["word"])
+            print("#--------------------------------------------------------#")
+            c += 1
+        
 def switch_accounts():
     ACCOUNT.log_in(input("enter account name(if it does not exist it will be created): "))
 
