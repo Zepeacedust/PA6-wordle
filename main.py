@@ -50,19 +50,29 @@ def check_history():
     if his == None:
         print("No games available")
     else:
+        wins = 0
+        losses = 0
         c = 1
         print("#--------------------------------------------------------#")
         for x in his:
             if x["state"] == "W":
-                gen = "Won"
+                gen = "won"
+                wins += 1
             else:
                 gen = "lost"
+                losses += 1
             print("Game",c)
             print("You had",x["guesses"],"guesses")
             print("You",gen,"The game")
             print("And the word you where looking for was:",x["word"])
+            print("Replay:")
+            for clue in x["clues"]:
+                print(clue[0])
+                print(clue[1])
             print("#--------------------------------------------------------#")
             c += 1
+        print(f"For a total of {losses} losses and {wins} wins.")
+        print(f"Win %: {100*wins/(wins+losses):.2f}")
         
 def switch_accounts():
     ACCOUNT.log_in(
