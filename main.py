@@ -1,9 +1,10 @@
 import random
 from game import Game
 from loading_module import Word_Manager
+from high_scores import Account_Manager
 
 WORDS = Word_Manager()
-
+ACCOUNT = Account_Manager()
 def play_game():
     guesses = int(input("How many guesses do you want? "))
     letters = int(input("How many letters do you want? "))
@@ -21,16 +22,21 @@ def play_game():
         print("Congratulations, you have won!")
     else:
         print("out of guesses, lol get rekt nerd.")
+    ACCOUNT.update(game)
 
 def add_word():
     WORDS.update(input("Enter word to add: "))
 def check_history():
-    pass
+    print(ACCOUNT.retrieve_data())
 def switch_accounts():
-    pass
+    ACCOUNT.log_in(input("enter account name(if it does not exist it will be created): "))
 
 def main_menu():
     while True:
+        if ACCOUNT.current == None:
+            print("You are not logged in, press 4 to log in.")
+        else:
+            print(f"Hello {ACCOUNT.current}.")
         print("1. Play a game")
         print("2. Add word")
         print("3. Check history")
@@ -53,3 +59,4 @@ def main_menu():
 main_menu()
         
 WORDS.exit()
+ACCOUNT.exit()

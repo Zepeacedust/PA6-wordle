@@ -6,13 +6,15 @@ class Game:
         self.selected = word
         self.attempts = 0
         self.gameState = ""
+        self.clues = []
     def save(self):
-        pass
+        return (self.guesses, self.gameState,self.length,self.selected,self.clues)
     def guess(self,attempt):
         if len(attempt) != self.length:
             print("incorrect length")
             return
         clue, correct = self.generate_clue(attempt.lower())
+        self.clues.append((attempt, clue))
         if correct:
             self.gameState = "W"
         else:

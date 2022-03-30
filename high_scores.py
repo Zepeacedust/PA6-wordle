@@ -14,23 +14,33 @@ def get_valid_files():
 
 def overwrite_file(filename,data):
     with open(filename, "w") as file:
-        file.write(",".join(data))
+        for game in data:
+            file.write(str(game[0])+"\n")
+            file.write(str(game[1])+"\n")
+            file.write(str(game[2])+"\n")
+            file.write(str(game[3])+"\n")
+            for guess in game[4]:
+                file.write(guess[0]+"\n")
+                file.write(guess[1]+"\n")
+        file.write("\n")
 
 class Account_Manager:
     def __init__(self):
         self.allowed = get_valid_files()
         self.loaded = dict()
         self.updated = set()
-    def retrieve_data(self,account):
+        self.current = None
+    def retrieve_data(self):
+        if self.current == None:
+            return None
         #if account has been loaded before
-        if account in self.loaded:
+        if self.current in self.loaded:
             #then return account data
-            return self.loaded[account]
+            return self.loaded[self.current]
         #else try to load it
-        if self.load(account):
-            return self.loaded[account]
+        if self.load(self.current):
+            return self.loaded[self.current]
             #then return account data
-        pass
     def load(self,account):
         if not account in self.allowed:
             return False
@@ -38,14 +48,15 @@ class Account_Manager:
         return True
         
     def update(self, game):
-        # length = len(word)
-        # self.updated.add(length)
-        # if length in self.loaded:
-        #     self.loaded[length].append(word.lower())
-        # else:
-        #     self.loaded[length] = [word.lower()]
-        pass
+        if self.current == None:
+            return
+        self.updated.add(self.current)
+        if self.current in self.loaded:
+            self.loaded[self.current].append(game.save())
+        else:
+            self.loaded[self.current] = [game.save()]
+    def log_in(self, account):
+        self.current = account
     def exit(self):
-        # for length in self.updated:
-        #     overwrite_file(f"words/l{length}.csv", self.loaded[length])
-        pass
+        for account in self.updated:
+            overwrite_file(f"accounts/{account}.csv", self.loaded[account])
