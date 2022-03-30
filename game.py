@@ -11,6 +11,7 @@ class Game:
     def guess(self,attempt):
         if self.attempts == self.guesses:
             print("Max guesses reached")
+            self.gameStat = "L"
             return
         if len(attempt) != self.lenght:
             print("incorrect length")
