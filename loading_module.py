@@ -36,9 +36,10 @@ class Word_Manager:
     def load(self,length):
         if not length in self.allowed:
             print("No words of that length exist, please try another")
-            return
+            return False
         print(f"Loading words of length {length}.")
         self.loaded[length] = load_file(f"words/l{length}.csv")
+        return True
         
     def update(self, word):
         length = len(word)
