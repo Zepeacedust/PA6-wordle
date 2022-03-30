@@ -2,15 +2,19 @@ import random
 from game import Game
 from loading_module import Word_Manager
 from high_scores import Account_Manager
-
+def get_integer(message):
+    output = input(message)
+    while not output.isdigit():
+        output = input("That is not a valid integer, please try again: ")
+    return int(output)
 WORDS = Word_Manager()
 ACCOUNT = Account_Manager()
 def play_game():
-    guesses = int(input("How many guesses do you want? "))
-    letters = int(input("How many letters do you want? "))
+    guesses = get_integer("How many guesses do you want? ")
+    letters = get_integer("How many letters do you want? ")
     word = WORDS.retrieve_word(letters)
     while word == None:
-        letters = int(input(f"No words of length {letters}, please enter another length: "))
+        letters = get_integer(f"No words of length {letters}, please enter another length: ")
         word = WORDS.retrieve_word(letters)
     game = Game(letters,guesses,word)
     while game.gameState == "":
