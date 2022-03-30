@@ -5,9 +5,9 @@ def load_file(filename):
 def get_valid_files():
     #finna öll leyfð files í words
     allowed = set()
-    for file in glob.glob("accounts/a*.csv"):
+    for file in glob.glob("accounts/*.csv"):
         try:
-            allowed.add(int(file[7:][:-4]))
+            allowed.add(int(file[9:][:-4]))
         except Exception as e:
             print(f'invalid filename: "{file}" in words folder')
     return allowed
@@ -22,15 +22,14 @@ class Account_Manager:
         self.loaded = dict()
         self.updated = set()
     def retrieve_data(self,account):
-        # assert isinstance(length, int)
-        # #if length has been loaded before
-        # if length in self.loaded:
-        #     #return random word with given length
-        #     return random.choice(self.loaded[length])
-        # #else try to load it
-        # if self.load(length):
-        #     return random.choice(self.loaded[length])
-        #     #then return random word with given length
+        #if account has been loaded before
+        if account in self.loaded:
+            #then return account data
+            return self.loaded[account]
+        #else try to load it
+        if self.load(account):
+            return self.loaded[account]
+            #then return account data
         pass
     def load(self,account):
         # if not length in self.allowed:
