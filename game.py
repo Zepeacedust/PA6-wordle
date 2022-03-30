@@ -38,4 +38,9 @@ class Game:
 
 g = Game(5,5,"Lorem")
 
+g.guess("lotem")
+g.guess("lotem")
+g.guess("lotem")
+g.guess("lotem")
+g.guess("lotem")
 g.guess("lorem")
