@@ -25,9 +25,31 @@ def add_word():
     pass
 def check_history():
     pass
+def switch_accounts():
+    pass
 
-
+def main_menu():
+    F  = False
+    while F  == False:
+        print("1. Play a game")
+        print("2. Add word")
+        print("3. Check history")
+        print("4. Switch account")
+        try:
+            a = int(input("What do you want to do? "))
+            if a in [1,2,3,4]:
+                if a == 1:
+                    play_game()
+                elif a == 2:
+                    add_word()
+                elif a == 3:
+                    check_history()
+                elif a == 4:
+                    switch_accounts()
+            else:
+                print("incorrect input")  
+        except:
+            print("incorrect input")
 while True:
-    print()
-    play_game()
+    main_menu()
         
