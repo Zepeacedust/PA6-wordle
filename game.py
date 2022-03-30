@@ -32,8 +32,3 @@ class Game:
                 return
         print(fin)
         print("Congrats you won!")
-
-
-g = Game(5,5,"Lorem")
-
-g.guess("lorem")
